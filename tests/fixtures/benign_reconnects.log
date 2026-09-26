@@ -1,0 +1,3 @@
+2026-09-25T09:03:11.100000-04:00 yuji-VirtualBox sshd[10001]: Connection closed by authenticating user yuji 100.80.6.68 port 51000 [preauth]
+2026-09-25T09:41:55.200000-04:00 yuji-VirtualBox sshd[10420]: Connection closed by authenticating user yuji 100.80.6.68 port 51330 [preauth]
+2026-09-25T10:15:02.300000-04:00 yuji-VirtualBox sshd[10890]: Connection closed by authenticating user yuji 100.80.6.68 port 51600 [preauth]
