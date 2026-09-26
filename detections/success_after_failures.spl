@@ -1,0 +1,9 @@
+index=linux_auth sourcetype=linux_secure ("Failed password" OR "Accepted password")
+| rex "(?<result>Failed|Accepted) password for (invalid user )?(?<user>\S+) from (?<src_ip>\S+) port"
+| where isnotnull(src_ip)
+| sort 0 _time
+| streamstats time_window=10m sum(eval(if(result=="Failed",1,0))) AS prior_failures dc(eval(if(result=="Failed",user,null()))) AS users_tried BY src_ip
+| where result=="Accepted" AND prior_failures>=10
+| stats max(prior_failures) AS failures_before_success max(users_tried) AS users_tried values(user) AS compromised_user min(_time) AS compromise_time BY src_ip
+| eval mitre="T1078", technique="Valid Accounts", severity="critical"
+| where failures_before_success >= 10
