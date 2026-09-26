@@ -8,7 +8,7 @@ Project 2 of the home lab. Extends [P1 SSH brute-force detection](https://github
 
 | # | Detection | MITRE | Status |
 |---|---|---|---|
-| 1 | Success after failures | T1078 Valid Accounts | ✅ CI-tested |
+| 1 | Success after failures | T1078 Valid Accounts | CI-tested |
 | 2 | Remote + publickey/preauth failures | T1110 / T1133 | planned |
 | 3 | Distributed spraying (per-user across IPs) | T1110.003 | planned |
 
