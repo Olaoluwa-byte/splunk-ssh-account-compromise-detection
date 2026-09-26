@@ -1,0 +1,8 @@
+index=linux_auth sourcetype=linux_secure "Connection closed by authenticating user" "[preauth]"
+| rex "Connection closed by authenticating user (?<user>\S+) (?<src_ip>\S+) port"
+| where isnotnull(src_ip)
+| sort 0 _time
+| streamstats time_window=5m count AS preauth_failures dc(user) AS users_tried BY src_ip
+| where preauth_failures >= 10
+| stats max(preauth_failures) AS peak_preauth_failures dc(user) AS users_targeted values(user) AS users min(_time) AS first_seen BY src_ip
+| eval mitre="T1110", technique="Brute Force (key-only / preauth)", severity="high"
